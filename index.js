@@ -6,6 +6,7 @@ $(() => {
     const subtract = $("#subtract")
     const multiply = $("#multiply")
     const divide = $("#divide")
+    let holdArray = []
     let numArr = []
     let formulaArray = []
     let firstNum;
@@ -18,14 +19,14 @@ $(() => {
 
     // display function
     const displayFunc = () => {
-        display.val(numArr.join(""))
+        display.val(holdArray.join(""))
     }
     // push selected numbers into numArr
     const numPush = (num) => {
         if (numArr[0] === 0) {
             numArr = []
         }
-        numArr.push(num)
+        holdArray.push(num)
         displayFunc()
     }
     $("#one").click(() => {
@@ -62,16 +63,18 @@ $(() => {
     // clearing the calculator
     clear.click(() => {
         console.log("clicked")
-        numArr = [0]
+        holdArray = [0]
+        numArr = []
         displayFunc()
     })
     // logical operator functions
     add.click(() => {
         firstNum = 0;
         console.log("add clicked")
-        logicOperator = '+';
-        firstNum = parseInt(numArr.join(''))
-        numArr = []
+        numArr.push(parseInt(holdArray.join('')))
+        numArr.push('+')
+        holdArray = []
+        console.log(numArr)
         displayFunc()
     })
     subtract.click(() => {
@@ -99,28 +102,12 @@ $(() => {
         displayFunc()
     })
     equals.click(() => {
-        switch (logicOperator) {
-            case '+':
-                secondNum = parseInt(numArr.join(''));
-                result = firstNum + secondNum
-                display.val(result)
-                break;
-            case '-':
-                secondNum = parseInt(numArr.join(''));
-                result = firstNum - secondNum
-                display.val(result)
-                break;
-            case '*':
-                secondNum = parseInt(numArr.join(''));
-                result = firstNum * secondNum
-                display.val(result)
-                break;
-            case '/':
-                secondNum = parseInt(numArr.join(''));
-                result = firstNum / secondNum
-                display.val(result)
-                break;
-        }
+        numArr.push(parseInt(holdArray.join('')))
+        numArr.forEach((num, i, arr) => {
+            let result = num[i]
+            console.log("This is result: " + result)
+            console.log(arr[i])
+        })
     })
 
 })
