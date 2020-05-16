@@ -1,8 +1,19 @@
 $(() => {
     const clear = $("#clear")
     const display = $("#display")
+    const equals = $("#equals")
+    const add = $("#add")
+    const subtract = $("#subtract")
+    const multiply = $("#multiply")
+    const divide = $("#divide")
     let numArr = []
+    let formulaArray = []
+    let firstNum;
+    let secondNum;
+    let result;
     display.val(numArr)
+
+    let logicOperator;
 
 
     // display function
@@ -11,6 +22,9 @@ $(() => {
     }
     // push selected numbers into numArr
     const numPush = (num) => {
+        if (numArr[0] === 0) {
+            numArr = []
+        }
         numArr.push(num)
         displayFunc()
     }
@@ -51,4 +65,62 @@ $(() => {
         numArr = [0]
         displayFunc()
     })
+    // logical operator functions
+    add.click(() => {
+        firstNum = 0;
+        console.log("add clicked")
+        logicOperator = '+';
+        firstNum = parseInt(numArr.join(''))
+        numArr = []
+        displayFunc()
+    })
+    subtract.click(() => {
+        firstNum = 0;
+        console.log("subtract clicked")
+        logicOperator = '-';
+        firstNum = parseInt(numArr.join(''))
+        numArr = []
+        displayFunc()
+    })
+    multiply.click(() => {
+        firstNum = 0;
+        console.log("multiply clicked")
+        logicOperator = '*';
+        firstNum = parseInt(numArr.join(''))
+        numArr = []
+        displayFunc()
+    })
+    divide.click(() => {
+        firstNum = 0;
+        console.log("divide clicked")
+        logicOperator = '/';
+        firstNum = parseInt(numArr.join(''))
+        numArr = []
+        displayFunc()
+    })
+    equals.click(() => {
+        switch (logicOperator) {
+            case '+':
+                secondNum = parseInt(numArr.join(''));
+                result = firstNum + secondNum
+                display.val(result)
+                break;
+            case '-':
+                secondNum = parseInt(numArr.join(''));
+                result = firstNum - secondNum
+                display.val(result)
+                break;
+            case '*':
+                secondNum = parseInt(numArr.join(''));
+                result = firstNum * secondNum
+                display.val(result)
+                break;
+            case '/':
+                secondNum = parseInt(numArr.join(''));
+                result = firstNum / secondNum
+                display.val(result)
+                break;
+        }
+    })
+
 })
